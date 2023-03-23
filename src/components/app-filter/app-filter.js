@@ -16,7 +16,7 @@ const AppFilter = () => {
             <button 
                 className="btn btn-outline-light"
                 type="button">
-                    Wage over 5000$
+                    Wage over 4000$
             </button>
         </div>
     );
