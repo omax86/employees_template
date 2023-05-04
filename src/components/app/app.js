@@ -1,3 +1,5 @@
+import { Component } from 'react';
+
 import AppInfo from '../app-info/app-info';
 import SearchPanel from '../search-panel/search-panel';
 import AppFilter from '../app-filter/app-filter';
@@ -6,27 +8,51 @@ import EmployersAddForm from '../employers-add-form/employers-add-form';
 
 import './app.css';
 
-function App() {
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [
+                {name: 'John C.', salary: 800, increase: false, id: 1},
+                {name: 'Alex M.', salary: 3000, increase: true, id: 2},
+                {name: 'Carl W.', salary: 5000, increase: false, id: 3}
+            ]
+        }
+    }
 
-    const data = [
-        {name: 'John C.', salary: 800, increase: false},
-        {name: 'Alex M.', salary: 3000, increase: true},
-        {name: 'Carl W.', salary: 5000, increase: false},
-    ];
+    deleteItem = (id) => {
+        this.setState(({data}) => {
+            // const index = data.findIndex(elem => elem.id === id);
+            
+            // const before = data.slice(0, index);
+            // const after = data.slice(index + 1);
 
-    return (
-        <div className="app">
-            <AppInfo/>
+            // const newArr = [...before, ...after];
 
-            <div className="search-panel">
-                <SearchPanel/>
-                <AppFilter/>
+            return {
+                data: data.filter(item => item.id!== id) 
+            }
+
+        })
+    }
+
+    render() {
+        return (
+            <div className="app">
+                <AppInfo/>
+    
+                <div className="search-panel">
+                    <SearchPanel/>
+                    <AppFilter/>
+                </div>
+    
+                <EmployersList 
+                    data={this.state.data}
+                    onDelete={this.deleteItem}/>
+                <EmployersAddForm/>
             </div>
-
-            <EmployersList data={data}/>
-            <EmployersAddForm/>
-        </div>
-    );
+        );
+    }
 }
 
 export default App;
