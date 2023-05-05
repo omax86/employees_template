@@ -17,6 +17,12 @@ class EmployersAddForm extends Component {
         })
     }
 
+    onSubmit = (e) => {
+        this.setState({
+            
+        })
+    }
+
     render() {
         const {name, salary} = this.state;
 
@@ -37,8 +43,10 @@ class EmployersAddForm extends Component {
                     name="salary"
                     value={salary} 
                     onChange={this.onValueChange}/>
-                    <button type="submit" 
-                    className="btn btn-outline-light">Add</button>
+                    <button 
+                    type="submit" 
+                    className="btn btn-outline-light"
+                    onSubmit={this.onSubmit}>Add</button>
                 </form>
             </div>
         )

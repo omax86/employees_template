@@ -49,7 +49,9 @@ class App extends Component {
                 <EmployersList 
                     data={this.state.data}
                     onDelete={this.deleteItem}/>
-                <EmployersAddForm/>
+                <EmployersAddForm
+                    onValueChange
+                />
             </div>
         );
     }
