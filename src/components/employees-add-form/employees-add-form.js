@@ -19,6 +19,7 @@ class EmployeesAddForm extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
+        if (this.state.name.length < 3 || !this.state.salary ) return alert("Entered name should contain 3 and more characters, salary can't be empty");
         this.props.onAdd(this.state.name, this.state.salary);
         this.setState({
             name: '',
