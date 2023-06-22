@@ -17,7 +17,8 @@ class App extends Component {
                 {name: 'Alex M.', salary: 3000, increase: true, rise: false, id: 2},
                 {name: 'Carl W.', salary: 5000, increase: false, rise: false, id: 3}
             ],
-            term:''
+            term: '',
+            promoted: []
         }
         this.maxId = 4;
     }
@@ -76,11 +77,22 @@ class App extends Component {
     }
 
     onUpdateSearch = (term) => {
-        this.setState({term: term})
+        this.setState({term}) // short of -> term: term
+    }
+
+    onPromotedFilter = () => {
+        this.setState(({promoted}) => {
+           promoted.filter(item => item.rise === true);
+            return {
+                data: promoted
+            }
+        })
+        
     }
 
     render() {
         const {data, term} = this.state;
+        // const {promoted} = this.state;
         const employees = this.state.data.length;
         const increased = this.state.data.filter(item => item.rise).length;
         const visibleData = this.searchEmp(data, term);
@@ -91,7 +103,8 @@ class App extends Component {
     
                 <div className="search-panel">
                     <SearchPanel onUpdateSearch={this.onUpdateSearch}/>
-                    <AppFilter/>
+                    <AppFilter 
+                        onPromotedFilter={this.onPromotedFilter}/>
                 </div>
             
                 <EmployeesList 
